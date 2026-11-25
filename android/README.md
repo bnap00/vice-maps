@@ -57,20 +57,29 @@ keyPassword=...
 
 Installing without a computer: copy the APK to the phone, open it, and allow installs from
 that app when Android asks. Play Protect may warn about an unknown app; that is expected for
-an app that isn't on the Play Store.
+an app that isn't on the Play Store. A sideloaded install works on the phone, but not on the
+car screen (see below).
 
 ## Show it in Android Auto
 
-Android Auto only lists apps from the Play Store until you allow unknown sources:
+Android Auto's **Unknown sources** developer setting does **not** cover apps built with the
+Car App Library, so a sideloaded APK won't appear on a real car's screen. Google's
+[testing guide](https://developer.android.com/training/cars/testing#test-real-vehicles)
+lists two ways to run it:
 
-1. On the phone, open **Settings → Connected devices → Connection preferences → Android Auto**.
-2. Tap **Version** about ten times until developer settings unlock.
-3. Open **⋮ → Developer settings** and turn on **Unknown sources**.
-4. Under **Customize launcher**, make sure **Vice Maps** is ticked.
+- **On your computer:** the
+  [Desktop Head Unit](https://developer.android.com/training/cars/testing/dhu) (DHU), an
+  Android Auto simulator. Install the app with `adb`, enable Android Auto's developer
+  settings (tap **Version** about ten times), start the head unit server, and run `desktop-head-unit`.
+- **In a real car:** install the app from a trusted source. Upload the release build to
+  Google Play's Internal App Sharing or an internal testing track. That needs a Play
+  developer account, but no public listing or Play review.
 
-Release builds only talk to the official Android Auto and Android Automotive hosts.
-Debug builds accept any host, so you can test with the
-[Desktop Head Unit](https://developer.android.com/training/cars/testing/dhu).
+Release builds only talk to the official Android Auto and Android Automotive hosts. Debug
+builds accept any host.
+
+The car screens are built on Google's navigation templates but haven't been tested on a
+real car yet. Reports are welcome.
 
 ## Use your own servers
 

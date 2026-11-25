@@ -7,7 +7,7 @@ It comes in two parts:
 
 - **[Chrome extension](extension/)** that restyles Google Maps in your browser.
 - **[Android app](android/)** with its own map, search and turn-by-turn voice navigation,
-  on the phone and on your car's screen through Android Auto. It needs no accounts and no API keys.
+  on the phone, with Android Auto screens for the car. It needs no accounts and no API keys.
 
 | Before | After | Night |
 |---|---|---|
@@ -36,8 +36,9 @@ cd android
 adb install -r app/build/outputs/apk/release/app-release.apk
 ```
 
-Then turn on **Unknown sources** in Android Auto's developer settings so it shows on the car
-screen. Full steps, settings and how it works: [android/README.md](android/README.md).
+A sideloaded APK runs on the phone. Android Auto only shows Car App Library apps from a
+trusted source such as Google Play's internal testing, or in the Desktop Head Unit on your
+computer. Full steps, settings and how it works: [android/README.md](android/README.md).
 
 ## Fair use of the free servers
 
