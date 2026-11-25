@@ -73,7 +73,7 @@ lists two ways to run it:
   settings (tap **Version** about ten times), start the head unit server, and run `desktop-head-unit`.
 - **In a real car:** install the app from a trusted source. Upload the release build to
   Google Play's Internal App Sharing or an internal testing track. That needs a Play
-  developer account, but no public listing or Play review.
+  developer account, but no public listing.
 
 Release builds only talk to the official Android Auto and Android Automotive hosts. Debug
 builds accept any host.
