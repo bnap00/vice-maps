@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "Vice Maps",
+  "version": "1.0.0",
+  "description": "Restyles Google Maps with a sunset-pastel, game-map look: plum glass panels, deco type, teal seas.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": ["storage"],
+  "action": {
+    "default_title": "Vice Maps",
+    "default_popup": "src/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.com/maps*",
+        "https://google.com/maps*",
+        "https://maps.google.com/*"
+      ],
+      "css": ["src/vice.css"],
+      "js": ["src/content.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["fonts/*.woff2"],
+      "matches": ["https://www.google.com/*", "https://google.com/*", "https://maps.google.com/*"]
+    }
+  ]
+}

@@ -1,0 +1,205 @@
+/* Vice Maps — restyle for Google Maps.
+ * Everything is scoped under html.vice-on so the popup toggle can switch it off.
+ * Colours of Google's own components come from content.js (token remap);
+ * this file handles type, shape, glass, and the map colour grade. */
+
+@font-face {
+  font-family: "Vice Display";
+  src: url("chrome-extension://__MSG_@@extension_id__/fonts/BigShouldersDisplay.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Vice Sans";
+  src: url("chrome-extension://__MSG_@@extension_id__/fonts/Jost.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+html.vice-on {
+  --vice-ink: #0f0c1a;
+  --vice-white: #fffafa;
+  --vice-blush: #fee8ea;
+  --vice-cream: #fff9cb;
+  --vice-peach: #ffd4a8;
+  --vice-pink: #ffc2d0;
+  --vice-pink-hover: #ef8fb6;
+  --vice-plum: #78487a;
+  --vice-plum-deep: #6a3e6c;
+  --vice-field-border: #855381;
+  --vice-thumb: #c07eaa;
+  --vice-soft: rgba(255, 160, 206, 0.25);
+  --vice-hairline: rgba(255, 250, 250, 0.15);
+  --vice-window: linear-gradient(202deg, #955d8d 0%, #855381 30%, #78487a 65%, #6a3e6c 100%);
+  --vice-radius: 24px;
+  --vice-sans: "Vice Sans", "Futura", "Century Gothic", system-ui, sans-serif;
+  --vice-display: "Vice Display", "Bebas Neue", "Oswald", Impact, sans-serif;
+  color-scheme: dark;
+  background: var(--vice-ink) !important;
+}
+
+/* ---------- Typography ---------- */
+/* Every text element except Google's icon fonts. Kept at low specificity (:where)
+ * so the display-font rules below win for headings and labels. */
+html.vice-on body,
+html.vice-on body :where(div, span, a, button, input, textarea, label, li, td, th, p, h1, h2, h3, h4, h5, h6):where(:not(.google-symbols, .google-material-icons, [class*="material-symbols"], [class*="material-icons"], [class*="google-symbols"])) {
+  font-family: var(--vice-sans) !important;
+}
+
+/* Place / panel titles → big condensed deco caps in cream (MapGenie's map title style). */
+html.vice-on h1,
+html.vice-on :is(.fontHeadlineLarge, .fontHeadlineMedium, .fontHeadlineSmall, .fontDisplayLarge, .fontDisplayMedium, .fontDisplaySmall) {
+  font-family: var(--vice-display) !important;
+  font-weight: 800 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.05 !important;
+  color: var(--vice-cream) !important;
+}
+html.vice-on h1 { font-size: 34px !important; }
+
+/* Section headings → peach condensed caps ("POINTS OF INTEREST"). */
+html.vice-on :is(h2, h3, .fontTitleLarge, .fontTitleMedium) {
+  font-family: var(--vice-display) !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--vice-peach) !important;
+}
+html.vice-on :is(h2, .fontTitleLarge) { font-size: 22px !important; }
+html.vice-on :is(h3, .fontTitleMedium) { font-size: 19px !important; }
+
+/* Category chips and rail labels: condensed caps, like MapGenie's category list. */
+html.vice-on .fontTitleSmall,
+html.vice-on .fontLabelMedium,
+html.vice-on :is(.fontTitleSmall, .fontLabelMedium) :not(.google-symbols) {
+  font-family: var(--vice-display) !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: 14px !important;
+}
+/* Short action labels under icons ("Directions", "Recents") must stay on one line. */
+html.vice-on .fontLabelMedium,
+html.vice-on .fontLabelMedium :not(.google-symbols) { font-size: 13px !important; letter-spacing: 0.01em; word-break: keep-all; hyphens: none; }
+html.vice-on button[jsaction^="pane."] :is(span, div):not(.google-symbols) {
+  font-family: var(--vice-display) !important;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  word-break: keep-all;
+}
+
+/* Google account bar "Sign in" → pink pill. */
+html.vice-on #gb a[href*="ServiceLogin"],
+html.vice-on #gb a[href*="accounts.google"] {
+  background: var(--vice-pink) !important;
+  color: var(--vice-ink) !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  font-family: var(--vice-display) !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+html.vice-on #gb a[href*="ServiceLogin"]:hover { background: var(--vice-pink-hover) !important; }
+
+/* ---------- Floating panels (tagged by content.js) ---------- */
+html.vice-on .vice-panel {
+  background: var(--vice-window) !important;
+  border-radius: var(--vice-radius) !important;
+  border: 1px solid var(--vice-hairline) !important;
+  box-shadow: 0 18px 50px rgba(15, 12, 26, 0.55) !important;
+  overflow: hidden;
+}
+html.vice-glass .vice-panel {
+  background:
+    linear-gradient(202deg, rgba(149, 93, 141, 0.86) 0%, rgba(133, 83, 129, 0.88) 30%, rgba(120, 72, 122, 0.9) 65%, rgba(106, 62, 108, 0.93) 100%) !important;
+  backdrop-filter: blur(14px) saturate(1.2);
+}
+/* Inner layers that would otherwise paint a flat token colour over our gradient. */
+html.vice-on .vice-panel .vice-flat { background: transparent !important; }
+
+/* Navigation rail on the far left. */
+html.vice-on .vice-rail {
+  background: transparent !important;
+}
+html.vice-on .vice-rail-bg {
+  background: rgba(15, 12, 26, 0.78) !important;
+  backdrop-filter: blur(10px);
+}
+
+/* Search box → pill field. */
+html.vice-on .vice-search {
+  background: var(--vice-plum-deep) !important;
+  border: 1px solid var(--vice-field-border) !important;
+  border-radius: 999px !important;
+  box-shadow: 0 6px 18px rgba(15, 12, 26, 0.35) !important;
+}
+html.vice-on .vice-search input {
+  color: var(--vice-white) !important;
+  caret-color: var(--vice-pink);
+  font-size: 17px !important;
+}
+html.vice-on .vice-search input::placeholder { color: rgba(254, 232, 234, 0.65) !important; }
+
+/* Category chips floating over the map. */
+html.vice-on .vice-chip {
+  background: rgba(120, 72, 122, 0.88) !important;
+  border: 1px solid var(--vice-hairline) !important;
+  border-radius: 999px !important;
+  color: var(--vice-blush) !important;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 14px rgba(15, 12, 26, 0.35) !important;
+}
+html.vice-on .vice-chip:hover { background: var(--vice-pink-hover) !important; color: var(--vice-ink) !important; }
+
+/* Map controls (zoom, my location, pegman) → round plum buttons. */
+html.vice-on .vice-ctrl {
+  background: var(--vice-plum) !important;
+  border-radius: 999px !important;
+  box-shadow: 0 6px 18px rgba(15, 12, 26, 0.45) !important;
+  overflow: hidden;
+}
+html.vice-on .vice-ctrl :is(button, div) { background-color: transparent !important; }
+html.vice-on .vice-ctrl :is(.google-symbols, svg, img) { filter: none; color: var(--vice-white) !important; }
+
+/* Tooltips. */
+html.vice-on [role="tooltip"] {
+  background: var(--vice-plum) !important;
+  color: var(--vice-white) !important;
+  border-radius: 12px !important;
+  font-family: var(--vice-display) !important;
+  letter-spacing: 0.03em;
+}
+
+/* Menus / dialogs. */
+html.vice-on :is([role="menu"], [role="dialog"], [role="listbox"]) {
+  border-radius: 18px !important;
+}
+
+/* Scrollbars. */
+html.vice-on * { scrollbar-color: var(--vice-thumb) transparent; scrollbar-width: thin; }
+
+/* Selection. */
+html.vice-on ::selection { background: var(--vice-pink-hover); color: var(--vice-ink); }
+
+/* ---------- Map colour grade ----------
+ * The map is one WebGL canvas, so we grade it with an SVG colour matrix
+ * (injected by content.js). Satellite / Street View are left untouched. */
+html.vice-map-day:not(.vice-raw) canvas.vice-map-canvas { filter: url(#vice-grade-day); }
+html.vice-map-night:not(.vice-raw) canvas.vice-map-canvas { filter: url(#vice-grade-night); }
+
+/* Soft sunset vignette over the map (never blocks clicks). */
+html.vice-on:not(.vice-raw):is(.vice-map-day, .vice-map-night) .vice-map-host::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    radial-gradient(120% 90% at 85% 0%, rgba(255, 176, 196, 0.22), transparent 55%),
+    radial-gradient(120% 90% at 0% 100%, rgba(120, 72, 122, 0.35), transparent 60%);
+  mix-blend-mode: soft-light;
+}
+html.vice-on .vice-map-host { background: var(--vice-ink) !important; }

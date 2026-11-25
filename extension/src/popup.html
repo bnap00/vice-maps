@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Vice Maps</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header>
+    <img src="../icons/icon48.png" alt="" width="36" height="36" />
+    <div>
+      <h1>Vice Maps</h1>
+      <p class="sub">Google Maps, sunset edition</p>
+    </div>
+  </header>
+
+  <label class="row">
+    <span>Theme</span>
+    <input type="checkbox" id="enabled" class="switch" />
+  </label>
+
+  <section>
+    <h2>Map grade</h2>
+    <div class="seg" role="radiogroup" aria-label="Map grade">
+      <button data-style="day" role="radio">Day</button>
+      <button data-style="night" role="radio">Night</button>
+      <button data-style="none" role="radio">Off</button>
+    </div>
+  </section>
+
+  <label class="row">
+    <span>Glass panels</span>
+    <input type="checkbox" id="glass" class="switch" />
+  </label>
+
+  <p class="foot">Satellite &amp; Street View are never graded.</p>
+
+  <script src="popup.js"></script>
+</body>
+</html>
